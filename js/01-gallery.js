@@ -27,11 +27,18 @@ for (const el of galleryItems) {
 galleryBox.onclick = (event) => {
 event.preventDefault();
 
-  basicLightbox
+  const instance = basicLightbox
     .create(
       `
 		<img width="1280" src = ${event.target.dataset.source}>
 	`
     )
-    .show();
+  instance.show();
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && instance.visible()) {
+      instance.close();
+    }
+  });
 };
+
